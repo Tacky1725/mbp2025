@@ -41,6 +41,24 @@
       font-size: 1.8em;
       letter-spacing: 1px;
     }
+    /* ハンバーガーメニューアイコン */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: #fff;
+      margin-bottom: 5px;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    /* ナビゲーション */
+    nav {
+      position: relative;
+    }
     nav ul {
       list-style: none;
       display: flex;
@@ -55,6 +73,30 @@
     nav ul li a:hover {
       color: #333;
     }
+    /* モバイル用：非表示設定 */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+      nav ul {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: linear-gradient(90deg, #eeb900, #ff6f61);
+        flex-direction: column;
+        width: 200px;
+        padding: 10px 0;
+        border-radius: 0 0 8px 8px;
+        display: none;
+      }
+      nav ul.show {
+        display: flex;
+      }
+      nav ul li {
+        margin: 15px 0;
+        text-align: center;
+      }
+    }
     /* ヒーローセクション */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://placeimg.com/1200/600/nature') no-repeat center center/cover;
@@ -65,7 +107,7 @@
       align-items: center;
       text-align: center;
       padding: 0 20px;
-      margin-top: 80px; /* ヘッダーの高さ分のマージン */
+      margin-top: 80px; /* ヘッダー分のマージン */
       color: #fff;
     }
     .hero h1 {
@@ -209,18 +251,6 @@
     footer p {
       font-size: 0.9em;
     }
-    /* レスポンシブ対応 */
-    @media (max-width: 768px) {
-      .schedule-item {
-        flex: 1 1 100%;
-      }
-      nav ul {
-        flex-direction: column;
-      }
-      nav ul li {
-        margin: 12px 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -231,7 +261,12 @@
       <h1>Birthday Bash</h1>
     </div>
     <nav>
-      <ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul id="nav-menu">
         <li><a href="#hero">ホーム</a></li>
         <li><a href="#overview">概要</a></li>
         <li><a href="#schedule">スケジュール</a></li>
@@ -321,6 +356,11 @@
 
   <!-- JavaScript -->
   <script>
+    // ハンバーガーメニューの切り替え
+    document.getElementById('hamburger').addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.toggle('show');
+    });
+
     // RSVP フォームのサンプル処理
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
       e.preventDefault();
