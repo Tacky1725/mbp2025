@@ -4,52 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Birthday Bash - 誕生日イベント</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    /* 基本のリセット */
+    /* リセットと基本設定 */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       line-height: 1.6;
+      background-color: #fff;
       color: #333;
+    }
+    a {
+      text-decoration: none;
+      transition: color 0.3s;
     }
     /* ヘッダー */
     header {
-      background: #444;
+      background: linear-gradient(90deg, #eeb900, #ff6f61);
       color: #fff;
-      padding: 10px 20px;
+      padding: 15px 30px;
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     header .logo h1 {
-      font-size: 1.5em;
+      font-size: 1.8em;
+      letter-spacing: 1px;
     }
     nav ul {
       list-style: none;
       display: flex;
     }
     nav ul li {
-      margin-left: 20px;
+      margin-left: 25px;
     }
     nav ul li a {
       color: #fff;
-      text-decoration: none;
-      transition: color 0.3s;
+      font-weight: 500;
     }
     nav ul li a:hover {
-      color: #ddd;
+      color: #333;
     }
     /* ヒーローセクション */
     .hero {
-      background: url('https://placeimg.com/1200/600/nature') no-repeat center center/cover;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://placeimg.com/1200/600/nature') no-repeat center center/cover;
       height: 600px;
       display: flex;
       flex-direction: column;
@@ -57,47 +65,64 @@
       align-items: center;
       text-align: center;
       padding: 0 20px;
-      margin-top: 60px; /* ヘッダー分のマージン */
+      margin-top: 80px; /* ヘッダーの高さ分のマージン */
+      color: #fff;
     }
     .hero h1 {
-      font-size: 3em;
-      color: #fff;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      font-size: 3.5em;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
     }
     .hero p {
       font-size: 1.5em;
-      color: #fff;
-      margin-top: 10px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      margin-bottom: 10px;
     }
     /* メインコンテンツ */
     .container {
-      padding: 60px 20px 40px;
+      padding: 80px 30px 60px;
     }
     section {
-      margin-bottom: 60px;
+      margin-bottom: 80px;
     }
     section h2 {
+      font-size: 2em;
       margin-bottom: 20px;
-      border-bottom: 2px solid #444;
-      padding-bottom: 5px;
+      position: relative;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    section h2::after {
+      content: "";
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6f61, #eeb900);
+      left: 0;
+      bottom: 0;
+      border-radius: 3px;
     }
     /* イベント概要 */
     .overview p {
-      margin-bottom: 15px;
-      font-size: 1.1em;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: #555;
     }
     .overview button {
-      padding: 10px 20px;
+      padding: 12px 30px;
       font-size: 1em;
-      background: #444;
+      background: linear-gradient(90deg, #ff6f61, #eeb900);
       color: #fff;
       border: none;
+      border-radius: 30px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.4s, transform 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .overview button:hover {
-      background: #666;
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #eeb900, #ff6f61);
     }
     /* スケジュール */
     .schedule-list {
@@ -107,50 +132,84 @@
     }
     .schedule-item {
       flex: 1 1 calc(33.333% - 20px);
-      background: #f4f4f4;
-      padding: 15px;
-      border-radius: 4px;
+      background: #fafafa;
+      padding: 20px;
+      border-radius: 8px;
       text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .schedule-item:hover {
+      transform: translateY(-5px);
     }
     .schedule-item h3 {
       margin-bottom: 10px;
-      font-size: 1.2em;
+      font-size: 1.3em;
+      color: #ff6f61;
+    }
+    .schedule-item p {
+      font-size: 1.1em;
+      color: #777;
     }
     /* RSVP フォーム */
     .rsvp form {
       display: flex;
       flex-direction: column;
+      max-width: 500px;
+      margin: auto;
     }
     .rsvp form input,
     .rsvp form textarea,
     .rsvp form button {
-      padding: 10px;
-      margin-bottom: 10px;
+      padding: 12px;
+      margin-bottom: 15px;
       font-size: 1em;
-    }
-    .rsvp form input, .rsvp form textarea {
-      border: 1px solid #ccc;
       border-radius: 4px;
+      border: 1px solid #ddd;
     }
     .rsvp form button {
       border: none;
-      background: #444;
+      background: linear-gradient(90deg, #ff6f61, #eeb900);
       color: #fff;
-      border-radius: 4px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.4s, transform 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     .rsvp form button:hover {
-      background: #666;
+      transform: scale(1.03);
+      background: linear-gradient(90deg, #eeb900, #ff6f61);
+    }
+    /* SNS連動 */
+    .social p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      color: #555;
+      text-align: center;
+    }
+    #socialFeed {
+      text-align: center;
+      padding: 20px;
+      border: 2px dashed #eee;
+      border-radius: 8px;
+      color: #aaa;
+    }
+    /* お問い合わせ */
+    .contact p {
+      font-size: 1.2em;
+      color: #555;
+      text-align: center;
     }
     /* フッター */
     footer {
-      background: #222;
-      color: #ccc;
+      background: #333;
+      color: #bbb;
       text-align: center;
-      padding: 20px;
+      padding: 25px 20px;
     }
-    /* レスポンシブ調整 */
+    footer p {
+      font-size: 0.9em;
+    }
+    /* レスポンシブ対応 */
     @media (max-width: 768px) {
       .schedule-item {
         flex: 1 1 100%;
@@ -159,7 +218,7 @@
         flex-direction: column;
       }
       nav ul li {
-        margin: 10px 0;
+        margin: 12px 0;
       }
     }
   </style>
@@ -196,7 +255,7 @@
     <!-- イベント概要 -->
     <section class="overview" id="overview">
       <h2>イベント概要</h2>
-      <p>〇〇さんの誕生日を記念して、素敵なサプライズやアクティビティが盛りだくさんのイベントを開催します。皆様で一緒にお祝いしましょう！</p>
+      <p>〇〇さんの誕生日を記念して、華やかでサプライズあふれるイベントを開催します。贅沢なひとときを皆様でお楽しみください！</p>
       <button onclick="location.href='details.html'">もっと見る</button>
     </section>
 
@@ -243,7 +302,6 @@
       <h2>SNS連動</h2>
       <p>最新の投稿をチェック！ #BirthdayBashEvent</p>
       <div id="socialFeed">
-        <!-- JavaScript で SNS フィードの埋め込み予定 -->
         <p>ここに最新のSNS投稿が表示されます。</p>
       </div>
     </section>
@@ -263,7 +321,7 @@
 
   <!-- JavaScript -->
   <script>
-    // RSVP フォームの簡単なサンプル処理
+    // RSVP フォームのサンプル処理
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('ご登録ありがとうございました！');
