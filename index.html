@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Birthday Bash - 誕生日イベント</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Montserrat と Great Vibes -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     /* リセットと基本設定 */
     * {
@@ -16,30 +16,34 @@
     body {
       font-family: 'Montserrat', sans-serif;
       line-height: 1.6;
-      background-color: #fff;
-      color: #333;
+      background-color: #000;
+      color: #fff;
     }
     a {
       text-decoration: none;
       transition: color 0.3s;
+      color: #d4af37; /* ゴールド */
     }
     /* ヘッダー */
     header {
-      background: linear-gradient(90deg, #eeb900, #ff6f61);
+      background: #000;
       color: #fff;
       padding: 15px 30px;
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #333;
     }
+    /* サイトタイトル（筆記体フォントを適用） */
     header .logo h1 {
-      font-size: 1.8em;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2em;
       letter-spacing: 1px;
+      color: #d4af37;
     }
     /* ハンバーガーメニューアイコン */
     .hamburger {
@@ -67,13 +71,13 @@
       margin-left: 25px;
     }
     nav ul li a {
-      color: #fff;
       font-weight: 500;
+      color: #fff;
     }
     nav ul li a:hover {
-      color: #333;
+      color: #d4af37;
     }
-    /* モバイル用：非表示設定 */
+    /* モバイル用：非表示設定＋フェードイン */
     @media (max-width: 768px) {
       .hamburger {
         display: flex;
@@ -82,15 +86,18 @@
         position: absolute;
         top: 60px;
         right: 0;
-        background: linear-gradient(90deg, #eeb900, #ff6f61);
+        background: #000;
         flex-direction: column;
         width: 200px;
         padding: 10px 0;
         border-radius: 0 0 8px 8px;
-        display: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
       }
       nav ul.show {
-        display: flex;
+        opacity: 1;
+        visibility: visible;
       }
       nav ul li {
         margin: 15px 0;
@@ -99,7 +106,7 @@
     }
     /* ヒーローセクション */
     .hero {
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://placeimg.com/1200/600/nature') no-repeat center center/cover;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://placeimg.com/1200/600/nature') no-repeat center center/cover;
       height: 600px;
       display: flex;
       flex-direction: column;
@@ -111,15 +118,18 @@
       color: #fff;
     }
     .hero h1 {
+      font-family: 'Great Vibes', cursive;
       font-size: 3.5em;
       letter-spacing: 2px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
       margin-bottom: 20px;
+      color: #d4af37;
     }
     .hero p {
       font-size: 1.5em;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
       margin-bottom: 10px;
+      color: #fff;
     }
     /* メインコンテンツ */
     .container {
@@ -134,13 +144,14 @@
       position: relative;
       padding-bottom: 10px;
       display: inline-block;
+      color: #d4af37;
     }
     section h2::after {
       content: "";
       position: absolute;
       width: 50%;
       height: 3px;
-      background: linear-gradient(90deg, #ff6f61, #eeb900);
+      background: #d4af37;
       left: 0;
       bottom: 0;
       border-radius: 3px;
@@ -149,22 +160,22 @@
     .overview p {
       font-size: 1.2em;
       margin-bottom: 20px;
-      color: #555;
+      color: #aaa;
     }
     .overview button {
       padding: 12px 30px;
       font-size: 1em;
-      background: linear-gradient(90deg, #ff6f61, #eeb900);
-      color: #fff;
+      background: #d4af37;
+      color: #000;
       border: none;
       border-radius: 30px;
       cursor: pointer;
       transition: background 0.4s, transform 0.3s;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
     }
     .overview button:hover {
       transform: scale(1.05);
-      background: linear-gradient(90deg, #eeb900, #ff6f61);
+      background: #fff;
     }
     /* スケジュール */
     .schedule-list {
@@ -174,11 +185,11 @@
     }
     .schedule-item {
       flex: 1 1 calc(33.333% - 20px);
-      background: #fafafa;
+      background: #111;
       padding: 20px;
       border-radius: 8px;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
       transition: transform 0.3s;
     }
     .schedule-item:hover {
@@ -187,11 +198,27 @@
     .schedule-item h3 {
       margin-bottom: 10px;
       font-size: 1.3em;
-      color: #ff6f61;
+      color: #d4af37;
     }
     .schedule-item p {
       font-size: 1.1em;
-      color: #777;
+      color: #ccc;
+    }
+    /* 会場アクセス */
+    .access {
+      text-align: center;
+    }
+    .access p {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+      color: #aaa;
+    }
+    .access iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 450px;
+      border: 0;
+      border-radius: 8px;
     }
     /* RSVP フォーム */
     .rsvp form {
@@ -207,46 +234,49 @@
       margin-bottom: 15px;
       font-size: 1em;
       border-radius: 4px;
-      border: 1px solid #ddd;
+      border: 1px solid #333;
+      background: #111;
+      color: #fff;
     }
     .rsvp form button {
       border: none;
-      background: linear-gradient(90deg, #ff6f61, #eeb900);
-      color: #fff;
+      background: #d4af37;
+      color: #000;
       cursor: pointer;
       transition: background 0.4s, transform 0.3s;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
     }
     .rsvp form button:hover {
       transform: scale(1.03);
-      background: linear-gradient(90deg, #eeb900, #ff6f61);
+      background: #fff;
     }
     /* SNS連動 */
     .social p {
       font-size: 1.1em;
       margin-bottom: 20px;
-      color: #555;
+      color: #aaa;
       text-align: center;
     }
     #socialFeed {
       text-align: center;
       padding: 20px;
-      border: 2px dashed #eee;
+      border: 2px dashed #333;
       border-radius: 8px;
-      color: #aaa;
+      color: #777;
     }
     /* お問い合わせ */
     .contact p {
       font-size: 1.2em;
-      color: #555;
+      color: #aaa;
       text-align: center;
     }
     /* フッター */
     footer {
-      background: #333;
-      color: #bbb;
+      background: #000;
+      color: #777;
       text-align: center;
       padding: 25px 20px;
+      border-top: 1px solid #333;
     }
     footer p {
       font-size: 0.9em;
@@ -270,6 +300,7 @@
         <li><a href="#hero">ホーム</a></li>
         <li><a href="#overview">概要</a></li>
         <li><a href="#schedule">スケジュール</a></li>
+        <li><a href="#access">会場アクセス</a></li>
         <li><a href="#rsvp">参加登録</a></li>
         <li><a href="#social">SNS</a></li>
         <li><a href="#contact">お問い合わせ</a></li>
@@ -321,6 +352,16 @@
       </div>
     </section>
 
+    <!-- 会場アクセス -->
+    <section class="access" id="access">
+      <h2>会場アクセス</h2>
+      <p>関西国際空港第1ターミナル</p>
+      <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3275.178402263752!2d135.24101911525188!3d34.43405798039941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e7f3447e1233%3A0x2477b1f8ea90fd9f!2z5pys5a-56Z2S!5e0!3m2!1sja!2sjp!4v1618199663243!5m2!1sja!2sjp" 
+          allowfullscreen="" loading="lazy">
+      </iframe>
+    </section>
+
     <!-- RSVP: 参加登録 -->
     <section class="rsvp" id="rsvp">
       <h2>参加登録</h2>
@@ -356,7 +397,7 @@
 
   <!-- JavaScript -->
   <script>
-    // ハンバーガーメニューの切り替え
+    // ハンバーガーメニューのフェードイン切り替え
     document.getElementById('hamburger').addEventListener('click', function() {
       document.getElementById('nav-menu').classList.toggle('show');
     });
