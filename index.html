@@ -4,413 +4,125 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Birthday Bash - 誕生日イベント</title>
-  <!-- Google Fonts: Montserrat と Great Vibes -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
-  <style>
-    /* リセットと基本設定 */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      line-height: 1.6;
-      background-color: #000;
-      color: #fff;
-    }
-    a {
-      text-decoration: none;
-      transition: color 0.3s;
-      color: #d4af37; /* ゴールド */
-    }
-    /* ヘッダー */
-    header {
-      background: #000;
-      color: #fff;
-      padding: 15px 30px;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #333;
-    }
-    /* サイトタイトル（筆記体フォントを適用） */
-    header .logo h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2em;
-      letter-spacing: 1px;
-      color: #d4af37;
-    }
-    /* ハンバーガーメニューアイコン */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .hamburger span {
-      height: 3px;
-      width: 25px;
-      background: #fff;
-      margin-bottom: 5px;
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-    /* ナビゲーション */
-    nav {
-      position: relative;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-    }
-    nav ul li {
-      margin-left: 25px;
-    }
-    nav ul li a {
-      font-weight: 500;
-      color: #fff;
-    }
-    nav ul li a:hover {
-      color: #d4af37;
-    }
-    /* モバイル用：非表示設定＋フェードイン */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-      nav ul {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background: #000;
-        flex-direction: column;
-        width: 200px;
-        padding: 10px 0;
-        border-radius: 0 0 8px 8px;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-      }
-      nav ul.show {
-        opacity: 1;
-        visibility: visible;
-      }
-      nav ul li {
-        margin: 15px 0;
-        text-align: center;
-      }
-    }
-    /* ヒーローセクション */
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://placeimg.com/1200/600/nature') no-repeat center center/cover;
-      height: 600px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-      margin-top: 80px; /* ヘッダー分のマージン */
-      color: #fff;
-    }
-    .hero h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 3.5em;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
-      margin-bottom: 20px;
-      color: #d4af37;
-    }
-    .hero p {
-      font-size: 1.5em;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-      margin-bottom: 10px;
-      color: #fff;
-    }
-    /* メインコンテンツ */
-    .container {
-      padding: 80px 30px 60px;
-    }
-    section {
-      margin-bottom: 80px;
-    }
-    section h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      position: relative;
-      padding-bottom: 10px;
-      display: inline-block;
-      color: #d4af37;
-    }
-    section h2::after {
-      content: "";
-      position: absolute;
-      width: 50%;
-      height: 3px;
-      background: #d4af37;
-      left: 0;
-      bottom: 0;
-      border-radius: 3px;
-    }
-    /* イベント概要 */
-    .overview p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-      color: #aaa;
-    }
-    .overview button {
-      padding: 12px 30px;
-      font-size: 1em;
-      background: #d4af37;
-      color: #000;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background 0.4s, transform 0.3s;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-    }
-    .overview button:hover {
-      transform: scale(1.05);
-      background: #fff;
-    }
-    /* スケジュール */
-    .schedule-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .schedule-item {
-      flex: 1 1 calc(33.333% - 20px);
-      background: #111;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-      transition: transform 0.3s;
-    }
-    .schedule-item:hover {
-      transform: translateY(-5px);
-    }
-    .schedule-item h3 {
-      margin-bottom: 10px;
-      font-size: 1.3em;
-      color: #d4af37;
-    }
-    .schedule-item p {
-      font-size: 1.1em;
-      color: #ccc;
-    }
-    /* 会場アクセス */
-    .access {
-      text-align: center;
-    }
-    .access p {
-      margin-bottom: 20px;
-      font-size: 1.2em;
-      color: #aaa;
-    }
-    .access iframe {
-      width: 100%;
-      max-width: 600px;
-      height: 450px;
-      border: 0;
-      border-radius: 8px;
-    }
-    /* RSVP フォーム */
-    .rsvp form {
-      display: flex;
-      flex-direction: column;
-      max-width: 500px;
-      margin: auto;
-    }
-    .rsvp form input,
-    .rsvp form textarea,
-    .rsvp form button {
-      padding: 12px;
-      margin-bottom: 15px;
-      font-size: 1em;
-      border-radius: 4px;
-      border: 1px solid #333;
-      background: #111;
-      color: #fff;
-    }
-    .rsvp form button {
-      border: none;
-      background: #d4af37;
-      color: #000;
-      cursor: pointer;
-      transition: background 0.4s, transform 0.3s;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-    }
-    .rsvp form button:hover {
-      transform: scale(1.03);
-      background: #fff;
-    }
-    /* SNS連動 */
-    .social p {
-      font-size: 1.1em;
-      margin-bottom: 20px;
-      color: #aaa;
-      text-align: center;
-    }
-    #socialFeed {
-      text-align: center;
-      padding: 20px;
-      border: 2px dashed #333;
-      border-radius: 8px;
-      color: #777;
-    }
-    /* お問い合わせ */
-    .contact p {
-      font-size: 1.2em;
-      color: #aaa;
-      text-align: center;
-    }
-    /* フッター */
-    footer {
-      background: #000;
-      color: #777;
-      text-align: center;
-      padding: 25px 20px;
-      border-top: 1px solid #333;
-    }
-    footer p {
-      font-size: 0.9em;
-    }
-  </style>
+  <!-- Google Fonts: Montserrat, Great Vibes, Noto Serif JP -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Great+Vibes&family=Noto+Serif+JP&display=swap" rel="stylesheet">
+  <!-- 外部CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- ヘッダー -->
-  <header>
-    <div class="logo">
-      <h1>Birthday Bash</h1>
-    </div>
-    <nav>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+  <!-- パスワード保護で正解の場合のみ表示 -->
+  <div id="content" style="display:none;">
+    <!-- ヘッダー -->
+    <header>
+      <div class="logo">
+        <h1>Birthday Bash</h1>
       </div>
-      <ul id="nav-menu">
-        <li><a href="#hero">ホーム</a></li>
-        <li><a href="#overview">概要</a></li>
-        <li><a href="#schedule">スケジュール</a></li>
-        <li><a href="#access">会場アクセス</a></li>
-        <li><a href="#rsvp">参加登録</a></li>
-        <li><a href="#social">SNS</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
-      </ul>
-    </nav>
-  </header>
+      <nav>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul id="nav-menu">
+          <li><a href="#hero">ホーム</a></li>
+          <li><a href="#overview">概要</a></li>
+          <li><a href="#schedule">スケジュール</a></li>
+          <li><a href="#access">会場アクセス</a></li>
+          <li><a href="#rsvp">参加登録</a></li>
+          <li><a href="#social">SNS</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- ヒーローセクション -->
-  <section class="hero" id="hero">
-    <h1>Happy Birthday Event</h1>
-    <p>2025年4月15日 | 東京</p>
-    <p>一緒に特別な瞬間を祝おう！</p>
-  </section>
-
-  <!-- メインコンテンツ -->
-  <div class="container">
-    
-    <!-- イベント概要 -->
-    <section class="overview" id="overview">
-      <h2>イベント概要</h2>
-      <p>〇〇さんの誕生日を記念して、華やかでサプライズあふれるイベントを開催します。贅沢なひとときを皆様でお楽しみください！</p>
-      <button onclick="location.href='details.html'">もっと見る</button>
+    <!-- ヒーローセクション -->
+    <section class="hero" id="hero">
+      <h1>Happy Birthday Event</h1>
+      <p>2025年4月15日 | 東京</p>
+      <p>一緒に特別な瞬間を祝おう！</p>
     </section>
 
-    <!-- スケジュール -->
-    <section class="schedule" id="schedule">
-      <h2>スケジュール</h2>
-      <div class="schedule-list">
-        <div class="schedule-item">
-          <h3>受付開始</h3>
-          <p>14:00～14:30</p>
-        </div>
-        <div class="schedule-item">
-          <h3>ウェルカムドリンク</h3>
-          <p>14:30～15:00</p>
-        </div>
-        <div class="schedule-item">
-          <h3>メインイベント</h3>
-          <p>15:00～17:00</p>
-        </div>
-        <div class="schedule-item">
-          <h3>サプライズ企画</h3>
-          <p>17:00～17:30</p>
-        </div>
-        <div class="schedule-item">
-          <h3>ケーキカット</h3>
-          <p>17:30～18:00</p>
-        </div>
-      </div>
-    </section>
+    <!-- メインコンテンツ -->
+    <div class="container">
+      <!-- イベント概要 -->
+      <section class="overview" id="overview">
+        <h2>イベント概要</h2>
+        <p>〇〇さんの誕生日を記念して、華やかでサプライズあふれるイベントを開催します。贅沢なひとときを皆様でお楽しみください！</p>
+        <button onclick="location.href='details.html'">もっと見る</button>
+      </section>
 
-    <!-- 会場アクセス -->
-    <section class="access" id="access">
-      <h2>会場アクセス</h2>
-      <p>関西国際空港第1ターミナル</p>
-      <iframe 
+      <!-- スケジュール -->
+      <section class="schedule" id="schedule">
+        <h2>スケジュール</h2>
+        <div class="schedule-list">
+          <div class="schedule-item">
+            <h3>受付開始</h3>
+            <p>14:00～14:30</p>
+          </div>
+          <div class="schedule-item">
+            <h3>ウェルカムドリンク</h3>
+            <p>14:30～15:00</p>
+          </div>
+          <div class="schedule-item">
+            <h3>メインイベント</h3>
+            <p>15:00～17:00</p>
+          </div>
+          <div class="schedule-item">
+            <h3>サプライズ企画</h3>
+            <p>17:00～17:30</p>
+          </div>
+          <div class="schedule-item">
+            <h3>ケーキカット</h3>
+            <p>17:30～18:00</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 会場アクセス -->
+      <section class="access" id="access">
+        <h2>会場アクセス</h2>
+        <p>関西国際空港第1ターミナル</p>
+        <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3275.178402263752!2d135.24101911525188!3d34.43405798039941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e7f3447e1233%3A0x2477b1f8ea90fd9f!2z5pys5a-56Z2S!5e0!3m2!1sja!2sjp!4v1618199663243!5m2!1sja!2sjp" 
           allowfullscreen="" loading="lazy">
-      </iframe>
-    </section>
+        </iframe>
+      </section>
 
-    <!-- RSVP: 参加登録 -->
-    <section class="rsvp" id="rsvp">
-      <h2>参加登録</h2>
-      <form id="rsvpForm">
-        <input type="text" name="name" placeholder="名前" required>
-        <input type="email" name="email" placeholder="メールアドレス" required>
-        <textarea name="message" placeholder="メッセージ (任意)" rows="4"></textarea>
-        <button type="submit">登録する</button>
-      </form>
-    </section>
+      <!-- RSVP: 参加登録 -->
+      <section class="rsvp" id="rsvp">
+        <h2>参加登録</h2>
+        <form id="rsvpForm">
+          <input type="text" name="name" placeholder="名前" required>
+          <input type="email" name="email" placeholder="メールアドレス" required>
+          <textarea name="message" placeholder="メッセージ (任意)" rows="4"></textarea>
+          <button type="submit">登録する</button>
+        </form>
+      </section>
 
-    <!-- SNS連動 -->
-    <section class="social" id="social">
-      <h2>SNS連動</h2>
-      <p>最新の投稿をチェック！ #BirthdayBashEvent</p>
-      <div id="socialFeed">
-        <p>ここに最新のSNS投稿が表示されます。</p>
-      </div>
-    </section>
+      <!-- SNS連動 -->
+      <section class="social" id="social">
+        <h2>SNS連動</h2>
+        <p>最新の投稿をチェック！ #BirthdayBashEvent</p>
+        <div id="socialFeed">
+          <p>ここに最新のSNS投稿が表示されます。</p>
+        </div>
+      </section>
 
-    <!-- お問い合わせ -->
-    <section class="contact" id="contact">
-      <h2>お問い合わせ</h2>
-      <p>ご質問等はメール（info@example.com）またはお電話（03-1234-5678）までご連絡ください。</p>
-    </section>
+      <!-- お問い合わせ -->
+      <section class="contact" id="contact">
+        <h2>お問い合わせ</h2>
+        <p>ご質問等はメール（info@example.com）またはお電話（03-1234-5678）までご連絡ください。</p>
+      </section>
+    </div>
 
+    <!-- フッター -->
+    <footer>
+      <p>&copy; 2025 Birthday Bash. All Rights Reserved.</p>
+    </footer>
   </div>
 
-  <!-- フッター -->
-  <footer>
-    <p>&copy; 2025 Birthday Bash. All Rights Reserved.</p>
-  </footer>
-
-  <!-- JavaScript -->
-  <script>
-    // ハンバーガーメニューのフェードイン切り替え
-    document.getElementById('hamburger').addEventListener('click', function() {
-      document.getElementById('nav-menu').classList.toggle('show');
-    });
-
-    // RSVP フォームのサンプル処理
-    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('ご登録ありがとうございました！');
-      this.reset();
-    });
-    
-    // SNS フィードのサンプル（静的な内容）
-    document.getElementById('socialFeed').innerHTML = '<p>最新のSNS投稿を表示する予定です。</p>';
-  </script>
+  <!-- 外部JS -->
+  <script src="password.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
