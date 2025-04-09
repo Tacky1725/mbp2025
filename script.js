@@ -6,18 +6,30 @@ document.getElementById('hamburger').addEventListener('click', function(e) {
   e.stopPropagation();
 });
 
-// 画面上でハンバーガーメニュー以外をクリックするとメニューを非表示にする
-document.addEventListener('click', function(e) {
+// 関連する全イベントでメニューを非表示にする関数
+function hideMenu() {
   const navMenu = document.getElementById('nav-menu');
-  const hamburger = document.getElementById('hamburger');
-  if (navMenu.classList.contains('show') &&
-      !navMenu.contains(e.target) &&
-      !hamburger.contains(e.target)) {
+  if (navMenu.classList.contains('show')) {
     navMenu.classList.remove('show');
   }
+}
+
+// 画面全体のタッチ／クリックでメニューを閉じる（ハンバーガー自体は除く）
+document.addEventListener('click', hideMenu);
+document.addEventListener('touchstart', hideMenu);
+// スクロール時にもメニューを非表示
+document.addEventListener('scroll', hideMenu);
+
+// 各メニュー項目押下時の処理（スムーズスクロールはCSSで実現）
+document.querySelectorAll('#nav-menu a').forEach(function(item) {
+  item.addEventListener('click', function(e) {
+    // メニューを閉じる
+    hideMenu();
+    // リンク先のアンカーにスムーズスクロール（CSSの scroll-behavior により実現）
+  });
 });
 
-// RSVP フォームのサンプル処理（送信時にアラート表示後、フォームリセット）
+// RSVP フォームのサンプル処理
 document.getElementById('rsvpForm').addEventListener('submit', function(e) {
   e.preventDefault();
   alert('ご登録ありがとうございました！');

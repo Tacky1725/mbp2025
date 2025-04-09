@@ -1,3 +1,8 @@
+/* スムーズスクロールを有効に */
+html {
+  scroll-behavior: smooth;
+}
+
 /* リセットと基本設定 */
 * {
   margin: 0;

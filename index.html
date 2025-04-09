@@ -10,12 +10,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- パスワード保護で正解の場合のみ表示 -->
+  <!-- パスワード認証が成功した場合のみ表示する主要コンテンツ -->
   <div id="content" style="display:none;">
     <!-- ヘッダー -->
     <header>
       <div class="logo">
-        <h1>Birthday Bash</h1>
+        <!-- タイトルをリンク化してホーム(ヒーロー)に移動 -->
+        <a href="#hero"><h1>Birthday Bash</h1></a>
       </div>
       <nav>
         <div class="hamburger" id="hamburger">

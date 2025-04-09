@@ -1,10 +1,13 @@
 (function(){
   // 正しいパスワードを設定（必要に応じて変更してください）
-  var correctPassword = "secretpassword";
-  // パスワード入力を促す
-  var userInput = prompt("このページを閲覧するにはパスワードを入力してください:");
+  var correctPassword = "20210329";
+  // 初期状態はロックされている
+  var isUnlocked = false; 
   
-  if(userInput === correctPassword) {
+  // パスワード入力を促す
+  var userInput = prompt("パスワード: YYYYMMDD"); 
+
+  if (userInput === correctPassword || isUnlocked) {
     // 正解の場合は主要コンテンツを表示
     document.getElementById("content").style.display = "block";
   } else {
