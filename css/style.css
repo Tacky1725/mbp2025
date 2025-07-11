@@ -1,0 +1,750 @@
+/* --- 基本設定とフォント --- */
+:root {
+  /* ▼▼▼ 色を変数として定義 ▼▼▼ */
+  --font-oswald: 'Oswald', sans-serif;
+  --font-noto: 'Noto Sans JP', sans-serif;
+  --color-text: #ffffff;
+  /* 基本の文字色 */
+  --color-text-subtle: #cccccc;
+  /* やや控えめな文字色 */
+  --color-accent-pink: #ff0059;
+  --color-accent-gold: #ffd700;
+  --color-bg-section: rgba(0, 0, 0, 0.2);
+  /* セクションの背景色 */
+  /* ▲▲▲ ▲▲▲ */
+}
+
+/* --- 全体の基本設定 --- */
+body {
+  margin: 0;
+  font-family: var(--font-noto);
+  color: var(--color-text);
+  /* 変数を使用 */
+  line-height: 1.6;
+  overflow-x: hidden;
+
+  background-color: #000;
+  background-image: url('../images/background_saxophone_cake.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* ▼ リンクの文字色も変数で統一 */
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+
+/* --- 背景の動くオブジェクト --- */
+#background-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.shape.triangle {
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.5);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  border-radius: 0;
+  top: 10%;
+  left: 15%;
+  animation: float 8s ease-in-out infinite alternate, rotate 20s linear infinite;
+}
+
+.shape.sphere {
+  width: 200px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 70%;
+  right: 10%;
+  animation: float 12s ease-in-out infinite alternate;
+}
+
+.shape.ellipse {
+  width: 250px;
+  height: 120px;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 40%;
+  left: 5%;
+  animation: float 15s ease-in-out infinite alternate;
+}
+
+.shape.star {
+  width: 80px;
+  height: 80px;
+  background-color: var(--color-text);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  border-radius: 0;
+  top: 80%;
+  left: 60%;
+  animation: float 8s ease-in-out infinite alternate, rotate 20s linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(-30px) rotate(15deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* --- ヘッダー --- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 4%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 92%;
+  z-index: 1000;
+  height: 80px;
+  background-color: transparent;
+  transition: background-color 0.4s ease;
+}
+
+.site-header.scrolled {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  /* Safariなど一部ブラウザ向けの記述 */
+}
+
+/* ロゴのコンテナ(h1)のデフォルト余白を無くし、高さをヘッダーに合わせる */
+.site-logo {
+  height: 100%;
+  margin: 0;
+}
+
+/* ロゴのリンク(a)も高さを100%にし、中の画像を垂直方向に中央寄せする */
+.site-logo a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.site-logo img {
+  /* ロゴ画像の高さを親要素(aタグ)の高さの95%にする */
+  height: 90%;
+  /* 高さに合わせて幅は自動で調整 */
+  width: auto;
+  display: block;
+  /* 画像下の余白を消す */
+}
+
+
+/* --- グローバルナビゲーション --- */
+.global-nav ul {
+  display: flex;
+  gap: 25px;
+}
+
+.global-nav a {
+  font-family: var(--font-oswald);
+  font-size: 16px;
+  transition: opacity 0.3s;
+}
+
+.global-nav a:hover {
+  opacity: 0.7;
+}
+
+#menu-button {
+  display: none;
+}
+
+
+/* --- メインコンテンツ共通 --- */
+.section-title {
+  font-family: var(--font-oswald);
+  font-size: 40px;
+  text-align: center;
+  margin: 0 0 40px;
+}
+
+.main-visual {
+  width: 100%;
+  margin: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#top img {
+  width: 40%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* --- メインビジュアル内のテキストスタイル --- */
+#top .place,
+#top .date {
+  text-align: center;
+  /* テキストを左右中央揃えに */
+  margin: 15px 0 0 0;
+}
+
+#top .place {
+  font-family: var(--font-oswald);
+  font-size: 42px;
+  letter-spacing: 1.5px;
+}
+
+/* 日付部分のスタイル */
+#top .date {
+  font-size: 20px;
+  line-height: 1.8;
+  /* 行間を調整 */
+}
+
+#top .date strong {
+  font-size: 1.6em;
+  font-weight: 700;
+  /* フォントウェイトを太く */
+  margin: 0 5px;
+}
+
+
+/* --- NEWSセクション --- */
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.news-item {
+  background: #111;
+  transition: transform 0.3s;
+}
+
+.news-item:hover {
+  transform: translateY(-5px);
+}
+
+.news-thumb img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.news-text {
+  padding: 15px;
+}
+
+.news-date {
+  font-size: 14px;
+  margin: 0;
+}
+
+.news-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px 0 0;
+}
+
+.view-more {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.view-more a {
+  font-family: var(--font-oswald);
+  border: 1px solid var(--color-text);
+  padding: 10px 40px;
+  transition: all 0.3s;
+}
+
+.view-more a:hover {
+  background: var(--color-accent-pink);
+  border-color: var(--color-accent-pink);
+}
+
+
+/* --- フッター --- */
+.site-footer {
+  padding: 30px 4%;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-text-subtle);
+}
+
+/* --- レスポンシブ対応 (768px以下の画面) --- */
+@media (max-width: 768px) {
+  #menu-button {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 101;
+  }
+
+  #menu-button span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--color-text);
+    margin: 6px 0;
+    transition: all 0.3s;
+  }
+
+  .menu-open #menu-button span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-open #menu-button span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-open #menu-button span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .global-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-100%);
+    transition: transform 0.4s;
+    z-index: 100;
+  }
+
+  .menu-open .global-nav {
+    transform: translateY(0);
+  }
+
+  .global-nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .global-nav a {
+    font-size: 24px;
+    padding: 15px 0;
+  }
+}
+
+/* --- スムーズスクロールを有効にする --- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* --- 各コンテンツセクションの共通スタイル --- */
+.content-section {
+  padding: 80px 4%;
+  /* ▼ 変更: セクションの背景色を変数で指定 */
+  background-color: var(--color-bg-section);
+}
+
+/* --- PRESENTERSセクション --- */
+.stage-container {
+  max-width: 1100px;
+  /* リスト全体の最大幅 */
+  margin: 0 auto 60px;
+  /* 中央寄せと下の余白 */
+}
+
+.stage-title {
+  font-family: var(--font-oswald);
+  font-size: 28px;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 0 30px;
+  color: var(--color-accent-pink);
+  border: 2px solid var(--color-accent-pink);
+  background-color: rgba(229, 0, 79, 0.1);
+  letter-spacing: 1.5px;
+}
+
+.presenter-list {
+  display: grid;
+  /* 画面幅に応じて列数を自動調整（アイテムの最小幅200px） */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+}
+
+.presenter-item a {
+  display: block;
+  background-color: #111;
+  text-decoration: none;
+  color: var(--color-text);
+  border-radius: 5px;
+  overflow: hidden;
+  /* 角丸を画像にも適用 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.presenter-item a:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.presenter-item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  /* 画像を正方形に保つ */
+  object-fit: cover;
+  /* 画像の比率を保ったままトリミング */
+  display: block;
+  border-bottom: 2px solid var(--color-accent-pink);
+}
+
+.presenter-name {
+  text-align: center;
+  font-weight: bold;
+  padding: 15px 10px;
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  /* アーティスト名を1行に保つ */
+  overflow: hidden;
+  /* はみ出したテキストを隠す */
+  text-overflow: ellipsis;
+  /* はみ出した部分を...で表示 */
+}
+
+/* --- PRESENTERSセクション レスポンシブ対応 (768px以下の画面) --- */
+@media (max-width: 768px) {
+  .stage-title {
+    font-size: 22px;
+  }
+
+  .presenter-list {
+    /* スマホではアイテムの最小幅を小さくする */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .presenter-name {
+    font-size: 14px;
+    padding: 12px 8px;
+  }
+}
+
+
+/* --- チケット料金表セクション --- */
+.ticket-table-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ticket-table-wrapper h4 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+.ticket-price-table table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #555;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ticket-price-table th,
+.ticket-price-table td {
+  border: 1px solid #555;
+  padding: 20px 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.ticket-price-table thead th {
+  background-color: #333;
+  font-family: var(--font-oswald);
+  font-size: 18px;
+  padding: 15px;
+}
+
+.ticket-price-table thead span,
+.ticket-price-table tbody th span {
+  font-size: 13px;
+  color: var(--color-text-subtle);
+}
+
+.ticket-price-table tbody th {
+  background-color: #222;
+  font-size: 16px;
+  width: 25%;
+}
+
+.ticket-price-table .price {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 15px;
+}
+
+.ticket-price-table .price span {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 8px 20px;
+  color: var(--color-text);
+  /* 変数を使用 */
+  font-weight: bold;
+  border-radius: 5px;
+  transition: opacity 0.3s;
+}
+
+.status-tag:hover {
+  opacity: 0.8;
+}
+
+.tag-onsale {
+  background-color: var(--color-accent-pink);
+}
+
+.tag-ended {
+  background-color: #555;
+}
+
+.tag-soldout {
+  background-color: #c80000;
+}
+
+.platinum-benefits {
+  margin-top: 40px;
+  background: #222;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.platinum-benefits h5 {
+  font-family: var(--font-oswald);
+  font-size: 20px;
+  margin: 0 0 15px;
+  text-align: center;
+  /* ▼ 変更: 特別感を出すため、金色の変数を指定 */
+  color: var(--color-accent-gold);
+}
+
+.platinum-benefits ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+/* --- レスポンシブテーブルのスタイル (768px以下) --- */
+@media (max-width: 768px) {
+
+  .ticket-price-table table,
+  .ticket-price-table thead,
+  .ticket-price-table tbody,
+  .ticket-price-table th,
+  .ticket-price-table td,
+  .ticket-price-table tr {
+    display: block;
+  }
+
+  .ticket-price-table thead {
+    display: none;
+  }
+
+  .ticket-price-table tr {
+    border: 1px solid #555;
+    margin-bottom: 20px;
+  }
+
+  .ticket-price-table td {
+    border: none;
+    border-bottom: 1px solid #444;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  .ticket-price-table td:last-child {
+    border-bottom: none;
+  }
+
+  .ticket-price-table td:before {
+    content: attr(data-title);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .ticket-price-table tbody th {
+    width: auto;
+    background-color: #1a1a1a;
+    font-size: 18px;
+  }
+}
+
+
+/* --- INFOセクションのスタイル --- */
+.info-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.info-block {
+  margin-bottom: 60px;
+}
+
+.info-block h4 {
+  font-family: var(--font-oswald);
+  font-size: 22px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #555;
+  margin: 0 0 20px;
+}
+
+.info-list {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 15px;
+}
+
+.info-list dt {
+  font-weight: bold;
+  text-align: right;
+  color: var(--color-text-subtle);
+}
+
+.info-list dd {
+  margin: 0;
+}
+
+.info-list a {
+  text-decoration: underline;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.info-list a:hover {
+  opacity: 1;
+}
+
+.access-map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.map-embed iframe {
+  width: 100%;
+  height: 300px;
+  border-radius: 5px;
+}
+
+.access-details h5 {
+  font-size: 20px;
+  margin: 0 0 20px;
+  font-weight: bold;
+}
+
+
+.about-grid {
+  display: flex;
+  align-items: center;
+  /* 画像とテキストを垂直方向の中央に揃えます */
+  gap: 40px;
+  /* 画像とテキストの間に40pxの隙間を作ります */
+}
+
+/* 子要素(画像)の幅を調整 */
+.about-grid .about-image {
+  flex: 1;
+  /* 全体の幅の約1/3を画像が使うようにします */
+  max-width: 300px;
+  /* 画像が大きくなりすぎないように最大幅を指定 */
+}
+
+/* 子要素(テキスト)の幅を調整 */
+.about-grid .about-text {
+  flex: 2;
+  /* 全体の幅の約2/3をテキストが使うようにします */
+  margin: 0;
+  /* pタグが元々持っている上下の余白をリセット */
+}
+
+
+/* --- INFOセクションのレスポンシブ対応 --- */
+@media (max-width: 768px) {
+  .info-list {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .info-list dt {
+    text-align: left;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+  }
+
+  .access-map-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    flex-direction: column;
+    gap: 20px;
+    /* 隙間を小さくする */
+    text-align: center;
+    /* テキストを中央揃えにする */
+  }
+}
