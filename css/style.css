@@ -383,7 +383,7 @@ html {
   background-color: var(--color-bg-section);
 }
 
-/* --- PRESENTERSセクション --- */
+/* --- ORGANIZERSセクション --- */
 .stage-container {
   max-width: 1100px;
   /* リスト全体の最大幅 */
@@ -403,14 +403,14 @@ html {
   letter-spacing: 1.5px;
 }
 
-.presenter-list {
+.organizer-list {
   display: grid;
   /* 画面幅に応じて列数を自動調整（アイテムの最小幅200px） */
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 25px;
 }
 
-.presenter-item a {
+.organizer-item a {
   display: block;
   background-color: #111;
   text-decoration: none;
@@ -421,12 +421,12 @@ html {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.presenter-item a:hover {
+.organizer-item a:hover {
   transform: translateY(-8px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
 }
 
-.presenter-item img {
+.organizer-item img {
   width: 100%;
   aspect-ratio: 1 / 1;
   /* 画像を正方形に保つ */
@@ -436,7 +436,7 @@ html {
   border-bottom: 2px solid var(--color-accent-pink);
 }
 
-.presenter-name {
+.organizer-name {
   text-align: center;
   font-weight: bold;
   padding: 15px 10px;
@@ -451,19 +451,19 @@ html {
   /* はみ出した部分を...で表示 */
 }
 
-/* --- PRESENTERSセクション レスポンシブ対応 (768px以下の画面) --- */
+/* --- ORGANIZERSセクション レスポンシブ対応 (768px以下の画面) --- */
 @media (max-width: 768px) {
   .stage-title {
     font-size: 22px;
   }
 
-  .presenter-list {
+  .organizer-list {
     /* スマホではアイテムの最小幅を小さくする */
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
   }
 
-  .presenter-name {
+  .organizer-name {
     font-size: 14px;
     padding: 12px 8px;
   }
