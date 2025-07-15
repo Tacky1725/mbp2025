@@ -1,17 +1,12 @@
 /* --- 基本設定とフォント --- */
 :root {
-  /* ▼▼▼ 色を変数として定義 ▼▼▼ */
   --font-oswald: 'Oswald', sans-serif;
   --font-noto: 'Noto Sans JP', sans-serif;
   --color-text: #ffffff;
-  /* 基本の文字色 */
   --color-text-subtle: #cccccc;
-  /* やや控えめな文字色 */
   --color-accent-pink: #ff0059;
   --color-accent-gold: #ffd700;
   --color-bg-section: rgba(0, 0, 0, 0.2);
-  /* セクションの背景色 */
-  /* ▲▲▲ ▲▲▲ */
 }
 
 /* --- 全体の基本設定 --- */
@@ -19,7 +14,6 @@ body {
   margin: 0;
   font-family: var(--font-noto);
   color: var(--color-text);
-  /* 変数を使用 */
   line-height: 1.6;
   overflow-x: hidden;
 
@@ -31,7 +25,6 @@ body {
   background-repeat: no-repeat;
 }
 
-/* ▼ リンクの文字色も変数で統一 */
 a {
   color: var(--color-text);
   text-decoration: none;
@@ -163,7 +156,6 @@ img {
 }
 
 .site-logo img {
-  /* ロゴ画像の高さを親要素(aタグ)の高さの95%にする */
   height: 90%;
   /* 高さに合わせて幅は自動で調整 */
   width: auto;
@@ -198,7 +190,7 @@ img {
   font-family: var(--font-oswald);
   font-size: 40px;
   text-align: center;
-  margin: 0 0 40px;
+  margin: 0 0 30px;
 }
 
 .main-visual {
@@ -229,77 +221,34 @@ img {
   letter-spacing: 1.5px;
 }
 
-/* 日付部分のスタイル */
 #top .date {
   font-size: 20px;
-  line-height: 1.8;
-  /* 行間を調整 */
 }
 
 #top .date strong {
   font-size: 1.6em;
   font-weight: 700;
-  /* フォントウェイトを太く */
   margin: 0 5px;
 }
 
+@media (max-width: 768px) {
+  #top img {
+    width: 60%;
+  }
 
-/* --- NEWSセクション --- */
-.news-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1000px;
-  margin: 0 auto;
+  #top .place,
+  #top .date {
+    margin: 5px 0 0 0;
+  }
+
+  #top .place {
+    font-size: 28px;
+  }
+
+  #top .date {
+    font-size: 16px;
+  }
 }
-
-.news-item {
-  background: #111;
-  transition: transform 0.3s;
-}
-
-.news-item:hover {
-  transform: translateY(-5px);
-}
-
-.news-thumb img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.news-text {
-  padding: 15px;
-}
-
-.news-date {
-  font-size: 14px;
-  margin: 0;
-}
-
-.news-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 5px 0 0;
-}
-
-.view-more {
-  text-align: center;
-  margin-top: 40px;
-}
-
-.view-more a {
-  font-family: var(--font-oswald);
-  border: 1px solid var(--color-text);
-  padding: 10px 40px;
-  transition: all 0.3s;
-}
-
-.view-more a:hover {
-  background: var(--color-accent-pink);
-  border-color: var(--color-accent-pink);
-}
-
 
 /* --- フッター --- */
 .site-footer {
@@ -378,16 +327,62 @@ html {
 
 /* --- 各コンテンツセクションの共通スタイル --- */
 .content-section {
-  padding: 80px 4%;
-  /* ▼ 変更: セクションの背景色を変数で指定 */
+  padding: 30px 4%;
   background-color: var(--color-bg-section);
+}
+
+
+/* --- NEWSセクション --- */
+.news-list {
+  max-width: 800px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.news-item {
+  display: flex;
+  align-items: baseline;
+  /* 日付とタイトルのテキストベースラインを揃える */
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: background-color 0.3s ease;
+}
+
+.news-date {
+  flex-shrink: 0;
+  /* 日付が縮まないようにする */
+  margin-right: 30px;
+  font-size: 16px;
+  color: var(--color-text-subtle);
+}
+
+.news-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* --- NEWSセクション レスポンシブ対応 --- */
+@media (max-width: 768px) {
+  .news-item {
+    flex-direction: column;
+    /* スマホでは縦積みにする */
+    align-items: flex-start;
+    padding: 8px 15px;
+  }
+
+  .news-date {
+    font-size: 14px;
+  }
 }
 
 /* --- ORGANIZERSセクション --- */
 .stage-container {
-  max-width: 1100px;
+  max-width: 500px;
   /* リスト全体の最大幅 */
-  margin: 0 auto 60px;
+  margin: 0 auto 30px;
   /* 中央寄せと下の余白 */
 }
 
@@ -396,7 +391,7 @@ html {
   font-size: 28px;
   text-align: center;
   padding: 10px 0;
-  margin: 0 0 30px;
+  margin: 0 0 20px;
   color: var(--color-accent-pink);
   border: 2px solid var(--color-accent-pink);
   background-color: rgba(229, 0, 79, 0.1);
@@ -480,7 +475,7 @@ html {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  margin: 0 0 30px;
+  margin: 0 0 20px;
 }
 
 .ticket-price-table table {
@@ -532,7 +527,6 @@ html {
   display: inline-block;
   padding: 8px 20px;
   color: var(--color-text);
-  /* 変数を使用 */
   font-weight: bold;
   border-radius: 5px;
   transition: opacity 0.3s;
@@ -550,12 +544,12 @@ html {
   background-color: #555;
 }
 
-.tag-soldout {
-  background-color: #c80000;
+.platinum-desc {
+  display: none;
 }
 
 .platinum-benefits {
-  margin-top: 40px;
+  margin-top: 30px;
   background: #222;
   padding: 20px;
   border-radius: 5px;
@@ -566,7 +560,6 @@ html {
   font-size: 20px;
   margin: 0 0 15px;
   text-align: center;
-  /* ▼ 変更: 特別感を出すため、金色の変数を指定 */
   color: var(--color-accent-gold);
 }
 
@@ -583,6 +576,13 @@ html {
 
 /* --- レスポンシブテーブルのスタイル (768px以下) --- */
 @media (max-width: 768px) {
+  .platinum-desc {
+    display: block;
+    text-align: left;
+    font-size: 15px;
+    color: var(--color-text);
+    margin: 5px;
+  }
 
   .ticket-price-table table,
   .ticket-price-table thead,
@@ -597,14 +597,9 @@ html {
     display: none;
   }
 
-  .ticket-price-table tr {
-    border: 1px solid #555;
-    margin-bottom: 20px;
-  }
-
   .ticket-price-table td {
     border: none;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #555;
     position: relative;
     padding-left: 50%;
     text-align: right;
@@ -612,6 +607,11 @@ html {
 
   .ticket-price-table td:last-child {
     border-bottom: none;
+  }
+
+  .ticket-price-table tbody th {
+    width: auto;
+    font-size: 18px;
   }
 
   .ticket-price-table td:before {
@@ -623,19 +623,24 @@ html {
     white-space: nowrap;
     text-align: left;
     font-weight: bold;
+    display: block;
   }
 
-  .ticket-price-table tbody th {
-    width: auto;
-    background-color: #1a1a1a;
-    font-size: 18px;
+  .platinum-benefits h5 {
+    margin: 0 0 10px;
+  }
+
+  .platinum-benefits ul {
+    flex-direction: column;
+    gap: 5px 0;
+    text-align: center;
   }
 }
 
 
 /* --- INFOセクションのスタイル --- */
 .info-container {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -646,9 +651,8 @@ html {
 .info-block h4 {
   font-family: var(--font-oswald);
   font-size: 22px;
-  padding-bottom: 10px;
   border-bottom: 1px solid #555;
-  margin: 0 0 20px;
+  margin: 0 0 15px;
 }
 
 .info-list {
@@ -692,7 +696,7 @@ html {
 
 .access-details h5 {
   font-size: 20px;
-  margin: 0 0 20px;
+  margin: 0 0 10px;
   font-weight: bold;
 }
 
@@ -700,25 +704,19 @@ html {
 .about-grid {
   display: flex;
   align-items: center;
-  /* 画像とテキストを垂直方向の中央に揃えます */
-  gap: 40px;
-  /* 画像とテキストの間に40pxの隙間を作ります */
+  gap: 10px;
 }
 
-/* 子要素(画像)の幅を調整 */
 .about-grid .about-image {
   flex: 1;
-  /* 全体の幅の約1/3を画像が使うようにします */
+  /* 全体の幅の約1/3を画像が使うようにする */
   max-width: 300px;
-  /* 画像が大きくなりすぎないように最大幅を指定 */
 }
 
-/* 子要素(テキスト)の幅を調整 */
 .about-grid .about-text {
   flex: 2;
-  /* 全体の幅の約2/3をテキストが使うようにします */
+  /* 全体の幅の約2/3をテキストが使うようにする */
   margin: 0;
-  /* pタグが元々持っている上下の余白をリセット */
 }
 
 
@@ -732,19 +730,25 @@ html {
   .info-list dt {
     text-align: left;
     border-bottom: 1px solid #333;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+    padding-top: 10px;
+  }
+
+  .info-list dt:first-child {
+    padding-top: 0;
   }
 
   .access-map-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .access-details h5 {
+    margin: 5px 0;
   }
 
   .about-grid {
     flex-direction: column;
     gap: 20px;
-    /* 隙間を小さくする */
     text-align: center;
-    /* テキストを中央揃えにする */
   }
 }
